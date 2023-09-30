@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+    <style>
+        /* Center-align the content and place it in a box */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .result-box {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 80%; /* Adjust the width of the box as needed */
+        }
+
+        /* Add more styling as needed for your content within the result box */
+        h1 {
+            color: #007bff;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        /* Style for extracted adjectives */
+        .adjectives {
+            color: #F44336;
+        }
+    </style>
+    <title>Analysis Result</title>
+</head>
+<body>
+    <div class="result-box">
+        <h1>Analysis Result</h1>
+        <p><strong>Input Text:</strong></p>
+        <div class="text-box">
+            <p>{{ text }}</p>
+        </div>
+        <p><strong>Sentiment:</strong> {{ overall_sentiment }}
+            {% if overall_sentiment == "Positive" %}
+                😊
+            {% elif overall_sentiment == "Negative" %}
+                😔
+            {% endif %}
+        </p>
+        <p><strong>Extracted Features:</strong></p>
+        <ul>
+            {% for feature in extracted_features %}
+                <li>{{ feature }}</li>
+            {% endfor %}
+        </ul>
+        <p class="adjectives"><strong>Extracted Adjectives:</strong></p>
+        <ul>
+            {% for adjective in extracted_adjectives %}
+                <li>{{ adjective }}</li>
+            {% endfor %}
+        </ul>
+        <a href="/">Back to Home</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Center-align the title */
+        h1 {
+            text-align: center;
+        }
+
+        /* Style for the input box */
+        .input-box {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 80%; /* Adjust the width of the box as needed */
+            margin: 0 auto; /* Center-align the box horizontally */
+        }
+
+        /* Style for the text area */
+        textarea {
+            width: 100%;
+            height: 100px;
+            resize: none; /* Prevent textarea resizing */
+        }
+
+        /* Style for the file input and Analyze button */
+        .file-input {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px; /* Adjust the gap between elements */
+        }
+    </style>
+    <title>Sentiment Analysis and Feature Extraction</title>
+    <script>
+        function openSelectedFile() {
+            // Get the file input element
+            var fileInput = document.getElementById('file');
+
+            // Check if a file is selected
+            if (fileInput.files.length > 0) {
+                // Get the selected file
+                var selectedFile = fileInput.files[0];
+
+                // Construct the URL for opening the selected file in Google Colab
+                var colabURL = 'https://www.kaggle.com/code/ramyakola/sentiment-analysis/edit?r=' + encodeURIComponent(selectedFile.name);
+
+                // Open the selected file in Google Colab
+                window.open(colabURL, '_blank');
+            } else {
+                alert('Please choose a file to open.');
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Sentiment Analysis and Feature Extraction</h1>
+    <div class="input-box">
+        <form method="POST" action="/analyze" enctype="multipart/form-data">
+            <div class="file-input">
+                <label for="text">Enter Text:</label>
+                <textarea name="text" id="text" rows="3" cols="20"></textarea>
+                <label for="file">Choose File:</label>
+                <input type="file" name="file" id="file">
+                <input type="button" value="Open Selected File" onclick="openSelectedFile()">
+                <input type="submit" value="Analyze">
+            </div>
+        </form>
+    </div>
+</body>
+</html>
